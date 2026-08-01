@@ -1,0 +1,17 @@
+{
+  "name": "jewelry-pos",
+  "version": "1.0.0",
+  "description": "Luxury Jewelry POS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "mkdir -p dist && rm -rf dist/* && cp -R public/. dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

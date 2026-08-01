@@ -1,0 +1,105 @@
+        <!-- INVENTORY STOCK PAGE -->
+        <div id="page-stock" class="page">
+            <div class="page-toolbar">
+                <h1>Stock & Cataloging</h1>
+                <button type="button" class="btn-add-entity" id="btn-show-product-form" onclick="showProductForm()">
+                    <span class="plus">+</span> Add Product
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="stock-search" class="search-bar" placeholder="Search catalog by name, category, or metal..." oninput="listPages.stock=1; renderStockPage()">
+            </div>
+
+            <div class="inventory-card">
+                <div class="inventory-card-header">
+                    <h3>Inventory Items</h3>
+                    <span class="inv-count" id="inventory-item-count">0 items</span>
+                </div>
+                <div class="inventory-table-wrap">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Material</th>
+                                <th>Category</th>
+                                <th>Retail</th>
+                                <th>Cost</th>
+                                <th>Stock Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stock-table-rows"></tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="stock-pagination"></div>
+            </div>
+
+            <div class="inventory-card">
+                <div class="inventory-card-header">
+                    <h3>Product Movement Audit Logs</h3>
+                </div>
+                <div class="inventory-table-wrap" style="max-height: 280px;">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Log ID</th>
+                                <th>Product</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Qty Changed</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-log-rows"></tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="stock-logs-pagination"></div>
+            </div>
+        </div>
+
+<!-- Product Form Modal -->
+        <div class="modal-overlay" id="product-form-modal" onclick="if(event.target===this) hideProductForm()">
+            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="product-form-title">
+                <div class="modal-dialog-header">
+                    <h2 id="product-form-title">Add New Product</h2>
+                    <button type="button" class="modal-close" onclick="hideProductForm()" aria-label="Close">&times;</button>
+                </div>
+                <div class="form-inline">
+                    <input type="hidden" id="original-product-id">
+                    <div class="form-group">
+                        <label>Product ID</label>
+                        <input type="text" id="productId" placeholder="e.g. prod101">
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="productName" placeholder="e.g. Classic Ring">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="categoryId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Retail Price ($)</label>
+                        <input type="number" id="retailPrice" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Cost Price ($)</label>
+                        <input type="number" id="costPrice" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Quantity</label>
+                        <input type="number" id="qty" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Metal / Material</label>
+                        <input type="text" id="material" placeholder="e.g. 18K Yellow Gold">
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier</label>
+                        <select id="supplierId"></select>
+                    </div>
+                    <button class="btn btn-add" id="btn-save-product" onclick="saveProduct()">Save Product</button>
+                    <button class="btn" id="btn-cancel-product-edit" onclick="cancelProductEdit()" style="background:#f1f5f9; color: var(--text-dark);">Cancel</button>
+                </div>
+            </div>
+        </div>

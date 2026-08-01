@@ -1,0 +1,78 @@
+        <!-- STAFF PANEL -->
+        <div id="page-staff" class="page">
+            <div class="page-toolbar">
+                <h1>Staff Roster</h1>
+                <button type="button" class="btn-add-entity" onclick="showStaffForm()">
+                    <span class="plus">+</span> Add Staff
+                </button>
+            </div>
+            <div class="search-container">
+                <input type="text" id="staff-search" class="search-bar" placeholder="Search by name, role, phone, or email..." oninput="listPages.staff=1; renderStaffPage()">
+            </div>
+
+            <div class="inventory-card">
+                <div class="inventory-card-header">
+                    <h3>Team Members</h3>
+                    <span class="inv-count" id="staff-item-count">0 staff</span>
+                </div>
+                <div class="inventory-table-wrap">
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>Staff</th>
+                                <th>Job Title</th>
+                                <th>Salary</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="staff-table-rows"></tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="staff-pagination"></div>
+            </div>
+        </div>
+
+<!-- Staff Form Modal -->
+        <div class="modal-overlay" id="staff-form-modal" onclick="if(event.target===this) hideStaffForm()">
+            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="staff-form-title">
+                <div class="modal-dialog-header">
+                    <h2 id="staff-form-title">Add New Staff</h2>
+                    <button type="button" class="modal-close" onclick="hideStaffForm()" aria-label="Close">&times;</button>
+                </div>
+                <div class="form-inline">
+                    <input type="hidden" id="original-employee-id">
+                    <div class="form-group">
+                        <label>Staff ID</label>
+                        <input type="text" id="employeeId" placeholder="e.g. employee101">
+                    </div>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" id="firstName-staff" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" id="lastName-staff" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input type="text" id="jobTitle" placeholder="Role">
+                    </div>
+                    <div class="form-group">
+                        <label>Salary ($)</label>
+                        <input type="number" id="hourlySalary" step="1" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="phoneNumber-staff" placeholder="Phone">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="email-staff" placeholder="Email">
+                    </div>
+                    <button class="btn btn-add" id="btn-save-staff" onclick="saveStaff()">Save Staff</button>
+                    <button class="btn" id="btn-cancel-staff-edit" onclick="cancelStaffEdit()" style="background:#f1f5f9; color: var(--text-dark);">Cancel</button>
+                </div>
+            </div>
+        </div>

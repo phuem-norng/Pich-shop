@@ -1,0 +1,110 @@
+        <!-- DASHBOARD -->
+        <div id="page-dashboard" class="page active">
+            <div class="dash-top">
+                <div>
+                    <h1>Dashboard Overview</h1>
+                    <p class="dash-subtitle">Sales analytics &amp; performance insights</p>
+                </div>
+                <div class="range-panel">
+                    <div class="range-dropdown" id="dash-range-dropdown">
+                        <button type="button" class="range-trigger" id="dash-range-trigger" onclick="toggleDashRangeMenu(event)" aria-haspopup="listbox" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M8 3.5v3M16 3.5v3M3.5 10h17"></path></svg>
+                            <span class="range-trigger-label" id="dash-range-label">Last 7 days</span>
+                            <svg class="range-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                        </button>
+                        <div class="range-menu" id="dash-range-menu" role="listbox">
+                            <button type="button" data-range="7d" class="active" onclick="setDashRange('7d')">Last 7 days</button>
+                            <button type="button" data-range="28d" onclick="setDashRange('28d')">Last 28 days</button>
+                            <button type="button" data-range="90d" onclick="setDashRange('90d')">Last 90 days</button>
+                            <button type="button" data-range="365d" onclick="setDashRange('365d')">Last 365 days</button>
+                            <button type="button" data-range="month" onclick="setDashRange('month')">ខែ / ឆ្នាំ</button>
+                            <button type="button" data-range="custom" onclick="setDashRange('custom')">Custom</button>
+                        </div>
+                    </div>
+                    <div class="range-extras">
+                        <div class="month-range" id="dash-month-range">
+                            <select id="dash-month" onchange="applyMonthYearRange()"></select>
+                            <select id="dash-year" onchange="applyMonthYearRange()"></select>
+                        </div>
+                        <div class="custom-range" id="dash-custom-range">
+                            <input type="date" id="dash-from">
+                            <span style="color:var(--text-muted);font-size:0.8rem;">to</span>
+                            <input type="date" id="dash-to">
+                            <button type="button" class="btn btn-add btn-apply" onclick="applyCustomRange()">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-period-badge" id="dash-period-label">Showing: Last 7 days</div>
+
+            <div class="stats-grid">
+                <div class="card">
+                    <h3>Revenue</h3>
+                    <p id="dash-revenue">$0.00</p>
+                    <div class="card-hint" id="dash-revenue-hint">In selected period</div>
+                </div>
+                <div class="card">
+                    <h3>Transactions</h3>
+                    <p id="dash-transactions">0</p>
+                    <div class="card-hint" id="dash-tx-hint">Orders completed</div>
+                </div>
+                <div class="card profit-card">
+                    <h3>Estimated Profit</h3>
+                    <p id="dash-profit">$0.00</p>
+                    <div class="card-hint">Revenue − cost</div>
+                </div>
+                <div class="card alert-card">
+                    <h3>Low Stock Warnings</h3>
+                    <p id="dash-low-stock">0</p>
+                    <div class="card-hint">Items ≤ 45 units</div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-panel">
+                    <div class="chart-panel-header">
+                        <h3>Revenue Trend</h3>
+                        <span id="dash-chart-grain">Daily</span>
+                    </div>
+                    <div class="chart-wrap">
+                        <canvas id="chart-revenue"></canvas>
+                    </div>
+                </div>
+                <div class="chart-panel">
+                    <div class="chart-panel-header">
+                        <h3>Payment Methods</h3>
+                        <span>Share of sales</span>
+                    </div>
+                    <div class="chart-wrap short">
+                        <canvas id="chart-payments"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-bottom">
+                <div class="table-container" style="margin-bottom:0;">
+                    <div class="table-title">Recent Transactions</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sale ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Handled By</th>
+                                <th>Method</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-recent-sales"></tbody>
+                    </table>
+                </div>
+                <div class="chart-panel">
+                    <div class="chart-panel-header">
+                        <h3>Top Products</h3>
+                        <span>By revenue</span>
+                    </div>
+                    <div class="top-products-list" id="dash-top-products"></div>
+                </div>
+            </div>
+        </div>

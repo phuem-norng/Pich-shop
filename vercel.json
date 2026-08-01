@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo 'Skipping install (static site)'",
+  "buildCommand": "mkdir -p dist && cp -R public/. dist/",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/((?!assets/|pages/).*)", "destination": "/index.html" }
+  ]
+}
