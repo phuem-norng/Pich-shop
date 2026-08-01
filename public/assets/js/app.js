@@ -47,6 +47,39 @@ async function ensurePageLoaded(pageId) {
     loadedPages[pageId] = true;
 }
 
+function isMobileNav() {
+    return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function setMobileNavOpen(open) {
+    const nav = document.getElementById('app-nav');
+    const backdrop = document.getElementById('nav-backdrop');
+    const toggle = document.getElementById('nav-toggle');
+    if (!nav) return;
+
+    document.body.classList.toggle('nav-open', open);
+    if (backdrop) {
+        backdrop.hidden = !open;
+        backdrop.classList.toggle('visible', open);
+    }
+    if (toggle) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+}
+
+function openMobileNav() {
+    setMobileNavOpen(true);
+}
+
+function closeMobileNav() {
+    setMobileNavOpen(false);
+}
+
+function toggleMobileNav() {
+    setMobileNavOpen(!document.body.classList.contains('nav-open'));
+}
+
 async function switchPage(pageId) {
     if (!isValidPage(pageId)) pageId = 'dashboard';
     await ensurePageLoaded(pageId);
@@ -70,6 +103,7 @@ async function switchPage(pageId) {
     if (titleEl) titleEl.textContent = pageTitles[pageId] || 'Dashboard';
 
     rememberPage(pageId);
+    closeMobileNav();
     renderData();
 }
 
@@ -82,10 +116,20 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
+    if (document.body.classList.contains('nav-open')) {
+        closeMobileNav();
+        return;
+    }
     if (document.getElementById('product-form-modal')?.classList.contains('open')) hideProductForm();
     if (document.getElementById('customer-form-modal')?.classList.contains('open')) hideCustomerForm();
     if (document.getElementById('supplier-form-modal')?.classList.contains('open')) hideSupplierForm();
     if (document.getElementById('staff-form-modal')?.classList.contains('open')) hideStaffForm();
+});
+
+window.addEventListener('resize', () => {
+    if (!isMobileNav() && document.body.classList.contains('nav-open')) {
+        closeMobileNav();
+    }
 });
 
 window.addEventListener('hashchange', () => {

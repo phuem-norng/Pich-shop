@@ -9,28 +9,37 @@
 </head>
 <body>
 
-    <nav>
+    <div class="nav-backdrop" id="nav-backdrop" onclick="closeMobileNav()" hidden></div>
+
+    <nav id="app-nav" aria-label="Main">
         <div class="logo-container">
             <img src="assets/images/logo.png" alt="Boutique Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <span class="logo-placeholder" style="display: none;">dia Jewelry POS</span>
         </div>
-        <button onclick="switchPage('dashboard')" id="nav-dashboard" class="active">Dashboard</button>
-        <button onclick="switchPage('sell')" id="nav-sell">Sell Page (POS)</button>
-        <button onclick="switchPage('order-history')" id="nav-order-history">Order History</button>
-        <button onclick="switchPage('stock')" id="nav-stock">Stock</button>
-        <button onclick="switchPage('customers')" id="nav-customers">Customers</button>
-        <button onclick="switchPage('suppliers')" id="nav-suppliers">Suppliers</button>
-        <button onclick="switchPage('staff')" id="nav-staff">Staff</button>
+        <button type="button" onclick="switchPage('dashboard')" id="nav-dashboard" class="active">Dashboard</button>
+        <button type="button" onclick="switchPage('sell')" id="nav-sell">Sell Page (POS)</button>
+        <button type="button" onclick="switchPage('order-history')" id="nav-order-history">Order History</button>
+        <button type="button" onclick="switchPage('stock')" id="nav-stock">Stock</button>
+        <button type="button" onclick="switchPage('customers')" id="nav-customers">Customers</button>
+        <button type="button" onclick="switchPage('suppliers')" id="nav-suppliers">Suppliers</button>
+        <button type="button" onclick="switchPage('staff')" id="nav-staff">Staff</button>
     </nav>
 
     <!-- Main Workspace -->
     <main>
         <div class="header-bar">
-            <div class="header-page-title" id="header-page-title">Dashboard</div>
+            <div class="header-left">
+                <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-controls="app-nav" aria-expanded="false" onclick="toggleMobileNav()">
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                    <span class="nav-toggle-bar"></span>
+                </button>
+                <div class="header-page-title" id="header-page-title">Dashboard</div>
+            </div>
             <div class="user-profile">
                 <div class="user-avatar" id="current-user-avatar">?</div>
-                <div class="form-group" style="flex-direction: row; align-items: center; gap: 8px;">
-                    <label style="white-space: nowrap;">Active Staff:</label>
+                <div class="form-group staff-select-group">
+                    <label for="employeeId-active">Active Staff:</label>
                     <select id="employeeId-active" onchange="updateActiveStaffProfile()"></select>
                 </div>
             </div>
